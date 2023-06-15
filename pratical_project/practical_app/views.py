@@ -115,14 +115,7 @@ def get_user(request, user_id):
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-@api_view(['GET'])
-def get_post(request, post_id):
-    try:
-        post = Post.objects.get(pk=post_id)
-        serializer = PostSerializer(post)
-        return Response(serializer.data)
-    except Post.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 @api_view(['GET'])
 def get_like(request, like_id):
@@ -193,6 +186,27 @@ def delete_user(request, user_id):
         return Response(status=status.HTTP_204_NO_CONTENT)
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['DELETE'])
+def delete_post(request, post_id):
+    try:
+        post = Post.objects.get(pk=post_id)
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['DELETE'])
+def delete_like(request, like_id):
+    try:
+        like = Like.objects.get(pk=like_id)
+        like.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 
 @api_view(['GET'])
