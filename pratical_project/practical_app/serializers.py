@@ -24,8 +24,11 @@ class UserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['post_id', 'title', 'description', 'content', 'created_at']
+        fields = ['post_id', 'title', 'description', 'content', 'created_at', 'like_count']
+        extra_kwargs = {
+            'like_count': {'required': False},
 
+        }
 
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
